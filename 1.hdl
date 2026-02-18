@@ -1,0 +1,49 @@
+
+PUNTO 1.
+
+CHIP UnsignedCompare16{
+IN x[16], y[16];
+OUT lt, eq,gt;
+
+Not16(in=y,out=negacionY);
+Add16(a=negacionY, b[0]= true, b[1..15=false, out=menosY);
+
+Add16(a=x, b=menosY, out= diferenciador, out[15]=signo, out[0..7]=bajo, out[8..15]=alto);
+
+//Out para eq 
+Or8Way(in=bajo, out=orbajo);
+Or8Way(in=alto, out=oralto);
+Or(a=orbajo, b=oralto, out=noteq);
+Not(in=noteq, out=eq);
+
+//Out para lt
+And(a=signo, b=true, out=lt);
+
+Or(a=lt, b=eq, out=ltOreq);
+Not(in=ltOreq, out=gt);
+
+}
+
+
+----------
+FORMA #1 DE MI LOGICA -- ESTO NO ES, SOLAMENTE ES PRODUCCION DE CONOCIMIENTO
+HalfAdder(a=x[0], b=x[1], carry=carry0)
+FullAdder(a=x[2] , b=x[3] , c=carry0 , sum=suma1 , carry=carry1);
+
+FullAdder(a=x[4] , b=x[5] , c=carry1, sum=suma2 , carry=carry2);
+FullAdder(a=x[6] , b=x[7] , c=carry2, sum=suma3 , carry=carry3);
+FullAdder(a=x[8] , b=x[9] , c=carry3 , sum=suma4 , carry=carry4);
+FullAdder(a=x[10] , b=x[11] , c=carry4 , sum=suma5 , carry=carrycarry5);
+FullAdder(a=x[12] , b=x[13] , c=carry5 , sum=suma6 , carry=carry6);
+FullAdder(a=x[13] , b=x[14] , c=carry6 , sum=suma7 , carry=carry8);
+FullAdder(a=x[15] , b=false , c=carry8 , sum=suma8 , carry=carryX);
+
+HalfAdder(a=y[0], b=y[1], carry=carry0)
+FullAdder(a=y[2] , b=[3] , c=carry0 , sum=suma1 , carry=carry1);
+FullAdder(a=x[4] , b=x[5] , c=carry1, sum=suma2 , carry=carry2);
+FullAdder(a=x[6] , b=x[7] , c=carry2, sum=suma3 , carry=carry3);
+FullAdder(a=x[8] , b=x[9] , c=carry3 , sum=suma4 , carry=carry4);
+FullAdder(a=x[10] , b=x[11] , c=carry4 , sum=suma5 , carry=carrycarry5);
+FullAdder(a=x[12] , b=x[13] , c=carry5 , sum=suma6 , carry=carry6);
+FullAdder(a=x[13] , b=x[14] , c=carry6 , sum=suma7 , carry=carry8);
+FullAdder(a=x[15] , b=false , c=carry8 , sum=suma8 , carry=carry);
