@@ -19,10 +19,11 @@ El proyecto abarca desde la construcción de:
 
 El proyecto está organizado en las siguientes secciones:
 
-### 1. 📂)
+### 1. 📂) Proyecto 1
 
+### 2. 📂) Proyecto 2
 
-### 2. 📂)
+### 3. 📂) Proyecto 3
 
 ---
 
